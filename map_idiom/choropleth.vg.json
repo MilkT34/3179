@@ -30,10 +30,6 @@
     {
       "calculate": "datum[select_year]",
       "as": "immigrants_year"
-    },
-    {
-      "calculate": "datum['immigrants_year'] == 0 ? 0.1 : datum['immigrants_year']",
-      "as": "immigrants_fixed"
     }
   ],
   "params": [
@@ -64,7 +60,7 @@
       "mark": {"type": "geoshape"},
       "encoding": {
         "color": {
-          "field": "immigrants_fixed",
+          "field": "immigrants_year",
           "title": "Number of immigrants)",
           "type": "quantitative",
           "scale": {
