@@ -6,7 +6,7 @@
   "projection": {"type": "equalEarth"},
 
   "data": {
-    "url": "https://raw.githubusercontent.com/MilkT34/3179/8dc89868c2000338c90c244e12eb0e0cf2dfd4ba/worldmap.json",
+    "url": "https://raw.githubusercontent.com/MilkT34/3179/refs/heads/main/worldmap.json",
     "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
   },
   "transform": [
@@ -33,10 +33,6 @@
       "as": "immigrants_year"
     },
     {
-      "calculate": "datum[select_year]",
-      "as": "immigrants_year"
-    },
-    {
       "calculate": "datum.immigrants_year < 100 ? '0-99' : (datum.immigrants_year < 1000 ? '100-999' : (datum.immigrants_year < 10000 ? '1000-9999' : '10000+'))",
       "as": "binned_immigrants" 
     }
@@ -57,27 +53,39 @@
   "layer": [
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/MilkT34/3179/8dc89868c2000338c90c244e12eb0e0cf2dfd4ba/worldmap.json",
+        "url": "https://raw.githubusercontent.com/MilkT34/3179/refs/heads/main/graticules.json",
+        "format": {"type": "topojson", "feature": "oceans"}
+      },
+      "mark": {"type": "geoshape", "fill": "lightskyblue", "stroke": "transparent"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/MilkT34/3179/refs/heads/main/worldmap.json",
         "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
       },
-      "mark": {"type": "geoshape", "fill": "null", "stroke": "grey"}
+      "mark": {"type": "geoshape", "fill": "transparent", "stroke": "grey"}
     },
     {
-      "mark": {"type": "geoshape", "fill": "white", "stroke": "transparent"}
+      "mark": {"type": "geoshape"},
+      "encoding": {
+        "color": {
+          "condition": [
+          {
+            "test": "datum.properties.NAME == 'Australia'",
+            "value": "grey"
+          },
+          {
+            "test": "datum.properties.NAME == 'Antarctica'",
+            "value": "white"
+          }
+    ],
+        "field": "binned_immigrants",
+        "title": "Number of immigrants:",
+        "type": "ordinal",
+        "scale": {"scheme": "greens"}
+        }
+      }
     },
-    {
-"mark": {"type": "geoshape"},
-"encoding": {
-  "color": {
-    "field": "binned_immigrants",
-    "title": "Number of immigrants:",
-    "type": "ordinal",
-    "scale": {
-      "scheme": "greens"
-    }
-  }
-}
-},
     {
       "mark": {"type": "geoshape", "stroke": "black", "strokeWidth": 0.4, "fill": "transparent"},
       "encoding": {
