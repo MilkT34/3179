@@ -1,9 +1,10 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Immigrants to Australia Origin (1980-2022)",
+  "title": "Origin of Immigrants to Australia (1980-2022)",
   "width": 800,
   "height": 400,
-  "projection": {"type": "naturalEarth1"},
+  "projection": {"type": "equalEarth"},
+
   "data": {
     "url": "https://raw.githubusercontent.com/MilkT34/3179/8dc89868c2000338c90c244e12eb0e0cf2dfd4ba/worldmap.json",
     "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
@@ -30,6 +31,14 @@
     {
       "calculate": "datum[select_year]",
       "as": "immigrants_year"
+    },
+    {
+      "calculate": "datum[select_year]",
+      "as": "immigrants_year"
+    },
+    {
+      "calculate": "datum.immigrants_year < 100 ? '0-99' : (datum.immigrants_year < 1000 ? '100-999' : (datum.immigrants_year < 10000 ? '1000-9999' : '10000+'))",
+      "as": "binned_immigrants" 
     }
   ],
   "params": [
@@ -51,26 +60,24 @@
         "url": "https://raw.githubusercontent.com/MilkT34/3179/8dc89868c2000338c90c244e12eb0e0cf2dfd4ba/worldmap.json",
         "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
       },
-      "mark": {"type": "geoshape", "fill": "null", "stroke": "lightgrey"}
+      "mark": {"type": "geoshape", "fill": "null", "stroke": "grey"}
     },
     {
       "mark": {"type": "geoshape", "fill": "white", "stroke": "transparent"}
     },
     {
-      "mark": {"type": "geoshape"},
-      "encoding": {
-        "color": {
-          "field": "immigrants_year",
-          "title": "Number of immigrants)",
-          "type": "quantitative",
-          "scale": {
-            "scheme": "browns",
-            "type": "linear"
-          }
-        }
-        
-      }
-    },
+"mark": {"type": "geoshape"},
+"encoding": {
+  "color": {
+    "field": "binned_immigrants",
+    "title": "Number of immigrants:",
+    "type": "ordinal",
+    "scale": {
+      "scheme": "greens"
+    }
+  }
+}
+},
     {
       "mark": {"type": "geoshape", "stroke": "black", "strokeWidth": 0.4, "fill": "transparent"},
       "encoding": {
