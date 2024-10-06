@@ -1,8 +1,13 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Origin of Immigrants to Australia by Percentage of Total",
-  "width": 800,
-  "height": 400,
+  "title": {
+      "text": "Origin of Immigrants to Australia by Percentage of Total",
+      "fontSize": 24,
+      "anchor": "start",
+      "offset": 40
+    },
+  "width": 1000,
+  "height": 500,
   "projection": {"type": "equalEarth"},
   "data": {
     "url": "https://raw.githubusercontent.com/MilkT34/3179/refs/heads/main/worldmap.json",
