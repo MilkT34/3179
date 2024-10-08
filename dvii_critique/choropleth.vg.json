@@ -1,0 +1,162 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+      "text": "Origin of Immigrants to Australia by Percentage of Total",
+      "fontSize": 24,
+      "anchor": "start",
+      "offset": 40
+    },
+  "width": 1000,
+  "height": 500,
+  "projection": {"type": "equalEarth"},
+  "data": {
+    "url": "https://raw.githubusercontent.com/MilkT34/3179/refs/heads/main/worldmap.json",
+    "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+  },
+  "transform": [
+    {
+      "lookup": "properties.NAME",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/MilkT34/3179/refs/heads/main/merged.csv",
+          "format": {"type": "csv"}
+        },
+        "key": "Country",
+        "fields": [
+          "1980",
+          "1981",
+          "1982",
+          "1983",
+          "1984",
+          "1985",
+          "1986",
+          "1987",
+          "1988",
+          "1989",
+          "1990",
+          "1991",
+          "1992",
+          "1993",
+          "1994",
+          "1995",
+          "1996",
+          "1997",
+          "1998",
+          "1999",
+          "2000",
+          "2001",
+          "2002",
+          "2003",
+          "2004",
+          "2005",
+          "2006",
+          "2007",
+          "2008",
+          "2009",
+          "2010",
+          "2011",
+          "2012",
+          "2013",
+          "2014",
+          "2015",
+          "2016",
+          "2017",
+          "2018",
+          "2019",
+          "2020",
+          "2021",
+          "2022"
+        ]
+      }
+    },
+    {"calculate": "datum[select_year]", "as": "immigrants_year"},
+    {
+      "window": [
+        {
+          "op": "sum",
+          "field": "immigrants_year",
+          "as": "total_immigrants"
+        }
+      ],
+      "frame": [null, null]
+    },
+    {
+      "calculate": "datum.immigrants_year / datum.total_immigrants * 100",
+      "as": "percentage_immigrants"
+    }
+  ],
+  "params": [
+    {
+      "name": "select_year",
+      "value": "2022",
+      "bind": {
+        "input": "range",
+        "min": 1980,
+        "max": 2022,
+        "step": 1,
+        "name": "Select year:"
+      }
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/MilkT34/3179/refs/heads/main/graticules.json",
+        "format": {"type": "topojson", "feature": "oceans"}
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "lightskyblue",
+        "stroke": "transparent"
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/MilkT34/3179/refs/heads/main/worldmap.json",
+        "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
+      },
+      "mark": {"type": "geoshape", "fill": "transparent", "stroke": "grey"}
+    },
+    {
+      "mark": {"type": "geoshape"},
+      "encoding": {
+        "color": {
+          "condition": [
+            {"test": "datum.properties.NAME == 'Australia'", "value": "grey"},
+            {"test": "datum.properties.NAME == 'Antarctica'", "value": "white"}
+          ],
+          "field": "percentage_immigrants",
+          "title": "Proportion (%):",
+          "type": "quantitative",
+          "scale": {"scheme": "greens"}
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "geoshape",
+        "stroke": "black",
+        "strokeWidth": 0.4,
+        "fill": "transparent"
+      },
+      "encoding": {
+        "color": {"value": "transparent"},
+        "tooltip": [
+          {"field": "properties.NAME", "type": "nominal", "title": "Country"},
+          {
+            "field": "immigrants_year",
+            "type": "quantitative",
+            "title": "Number of Immigrants",
+            "format": ","
+          },
+          {
+            "field": "percentage_immigrants",
+            "type": "quantitative",
+            "title": "Total Immigrants (%)",
+            "format": ".2f"
+          }
+        ]
+      }
+    }
+  ]
+}
