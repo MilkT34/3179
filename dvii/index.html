@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immigration to Australia (1980-2022)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaeaea;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            font-size: 50px;
+        }
+        p {
+            font-size: 20px;
+        }
+        .chart-container {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            width: 97%;
+            max-width: 1980px;
+        }
+        .chart {
+            width: 80%;
+            height: 600px;
+        }
+        .text-box {
+            width: 18%;
+            margin: 0 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #fafafa;
+            text-align: left; 
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+            height: 600px;
+        }
+        footer {
+            margin-top: 20px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Immigration to Australia (1980-2022)</h1>
+
+    <div class="chart-container">
+        <div class="text-box" style="order: 2;">
+            <p>Description of the choropleth map goes here.</p>
+        </div>
+        <div id="choropleth_map" class="chart" style="order: 1;"></div>
+    </div>
+
+    <div class="chart-container">
+        <div class="text-box" style="order: 1;">
+            <p>There is an overall upwards trend in immigration, with the numbers steadily increasing from around 150,000 in 1980 to a peak of nearly 600,000 before 2020. A significant drop occurs in 2019, coinciding with the global COVID-19 pandemic, which drastically affected migration flows due to travel restrictions. However, by 2022, the number of immigrants rebounds strongly, exceeding pre-pandemic levels. </p>
+        </div>
+        <div id="line_chart" class="chart" style="order: 2;"></div>
+    </div>
+
+    <div class="chart-container">
+        <div class="text-box" style="order: 2;">
+            <p>Asia has been the dominant source of immigrants to Australia, particularly after the 2000s, as seen by the dark green shades representing high immigration levels. Europe, once a major contributor, shows a decline in immigration over the years, while Africa and Oceania maintain moderate but steady trends. North America shows a slight increase in recent decades, and South America remains the least significant contributor, though it has experienced a gradual rise. The pandemic's impact is also evident, with immigration levels falling sharply in 2020 across all continents before recovering by 2022.</p>
+        </div>
+        <div id="heat_map" class="chart" style="order: 1;"></div>
+    </div>
+
+    <div class="chart-container">
+        <div class="text-box" style="order: 1;">
+            <p>Description of the bar chart goes here.</p>
+        </div>
+        <div id="bar_chart" class="chart" style="order: 2;"></div>
+    </div>
+
+    <script type="text/javascript"> 
+        vegaEmbed("#choropleth_map", "choropleth.vg.json").catch(console.error);
+        vegaEmbed("#line_chart", "linechart.vg.json").catch(console.error);
+        vegaEmbed("#heat_map", "heatmap.vg.json").catch(console.error);
+        vegaEmbed("#bar_chart", "barchart.vg.json").catch(console.error);
+    </script>
+
+    <footer>
+        <p>FIT3179 Data Visualisation II by Raymond Huynh (32521790)</p>
+    </footer>
+
+</body>
+</html>
