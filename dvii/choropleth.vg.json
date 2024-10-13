@@ -153,38 +153,6 @@
           }
         ]
       }
-    },
-    {
-      "mark": {
-        "type": "text",
-        "color": "orangered",
-        "stroke": "black",
-        "strokeWidth": 0.5,
-        "fontSize": 14,
-        "fontWeight": "bold",
-        "dx": 10,
-        "dy": -10
-      },
-      "encoding": {
-        "text": {"field": "label", "type": "nominal"},
-        "longitude": {"field": "longitude", "type": "quantitative"},
-        "latitude": {"field": "latitude", "type": "quantitative"}
-      },
-      "data": {
-        "values": [
-          {
-            "longitude": -20,
-            "latitude": 60,
-            "label": "UK Favored Migration Policies"
-          },
-          {"longitude": 100, "latitude": 60, "label": "China and India Major"},
-          {
-            "longitude": 95,
-            "latitude": 55,
-            "label": "Contributors in 21st Century"
-          }
-        ]
-      }
     }
   ]
 }

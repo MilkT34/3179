@@ -122,7 +122,8 @@
         "align": "right",
         "dx": 5,
         "dy": -5,
-        "color": "red"
+        "color": "red",
+        "fontSize": 14  
       },
       "encoding": {
         "x": {"datum": "2019", "type": "ordinal"},
@@ -136,7 +137,8 @@
         "align": "right",
         "dx": 5,
         "dy": -5,
-        "color": "red"
+        "color": "red",
+        "fontSize": 14
       },
       "encoding": {
         "x": {"datum": "1997", "type": "ordinal"},
